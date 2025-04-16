@@ -1,24 +1,26 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator</title>
-    <link rel="stylesheet" href="stylr.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Age Calculator</title>
+  <link rel="stylesheet" href="stylr.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Age Calculator</h1>
-        <form id="age-calculator">
-            <label for="birthdate">Enter Birthdate:</label>
-            <input type="date" id="birthdate" required>
-            <button id="calculate-btn">Calculate Age</button>
-            <p id="result"></p>
-        </form>
-    </div>
+  <div class="mode-toggle" id="modeToggle">🌙</div>
 
-    <script src="script.js"></script>
+  <div class="background">
+    <div class="container">
+      <h1>⚡ Age Calculator</h1>
+      <form id="age-calculator">
+        <label for="birthdate">Select or type your birthdate:</label>
+        <input type="date" id="birthdate" placeholder="YYYY-MM-DD" required />
+        <button id="calculate-btn">🎯 Calculate</button>
+        <p id="result"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
