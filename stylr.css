@@ -1,67 +1,156 @@
-/* style.css */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    height: 100vh;
+/* Theme Variables */
+:root {
+    --bg: linear-gradient(135deg, #1f1c2c, #928dab);
+    --text-color: #ffffff;
+    --primary: #00f9ff;
+    --input-bg: rgba(255, 255, 255, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --box-shadow: rgba(31, 38, 135, 0.37);
+    --border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  body.light {
+    --bg: linear-gradient(135deg, #ffecd2, #fcb69f, #a1c4fd, #c2e9fb);
+    --text-color: #1f1c2c;
+    --primary: #0078ff;
+    --input-bg: rgba(255, 255, 255, 0.95);
+    --glass-bg: rgba(255, 255, 255, 0.5);
+    --box-shadow: transparent;
+    --border-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  * {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .background {
+    background: var(--bg);
+    background-size: 300% 300%;
+    animation: gradientMove 15s ease infinite;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-.container {
-    background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 500px;
+  }
+  
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .container {
+    background: var(--glass-bg);
+    border-radius: 20px;
+    padding: 40px 30px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px var(--box-shadow);
     text-align: center;
-    height: 300px ;
-}
-
-h1 {
-    margin-top: 0;
-}
-
-form {
-    margin-top: 20px;
-}
-
-label {margin-bottom: 20px;
-
-}
-
-input[type="date"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 90%;
-    margin-bottom: 10px;
-    margin-top: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4caaaf;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     width: 100%;
+    max-width: 450px;
+    border: 1px solid var(--border-color);
+    transition: all 0.4s ease-in-out;
+  }
+  
+  h1 {
+    color: var(--primary);
+    font-size: 30px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px var(--primary);
+  }
+  
+  form label {
+    color: var(--text-color);
+    font-size: 16px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  
+  input[type="date"] {
+    appearance: none;
+    background: var(--input-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    color: var(--text-color);
+    padding: 14px 16px;
+    font-size: 16px;
+    width: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: text;
+    text-align: center;
+    box-shadow: inset 0 0 4px var(--primary);
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  input[type="date"]::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+  }
+  
+  input[type="date"]:focus {
+    outline: none;
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+  
+  button {
+    padding: 12px;
+    font-size: 16px;
+    background: var(--primary);
+    color: var(--text-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px var(--primary);
     margin-top: 10px;
-}
-
-button:hover {
-    background-color: #3e8e41;
-}
-
-#result {
-    font-size: 24px;
-    margin-top: 20px;
-    margin-top: 50px;
-    font-style:oblique;
-}
+  }
+  
+  button:hover {
+    background-color: #ffffff;
+    color: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+    transform: scale(1.05);
+  }
+  
+  #result {
+    font-size: 20px;
+    margin-top: 30px;
+    color: var(--text-color);
+    font-style: italic;
+    line-height: 1.8;
+  }
+  
+  .mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: var(--text-color);
+    padding: 10px 12px;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 6px var(--primary);
+    z-index: 999;
+    transition: all 0.3s ease;
+  }
+  
