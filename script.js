@@ -1,5 +1,3 @@
-
-
 const birthdateInput = document.getElementById('birthdate');
 const calculateBtn = document.getElementById('calculate-btn');
 const resultElement = document.getElementById('result');
@@ -8,20 +6,54 @@ calculateBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
     const birthdate = new Date(birthdateInput.value);
-    const today = new Date();
-    const age = calculateAge(birthdate, today);
+    const now = new Date();
 
-    resultElement.textContent = `You are ${age} years old.`;
-});
-
-function calculateAge(birthdate, today) {
-    const age = today.getFullYear() - birthdate.getFullYear();
-    const monthDiff = today.getMonth() - birthdate.getMonth();
-    const dayDiff = today.getDate() - birthdate.getDate();
-
-    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-        return age - 1;
+    if (birthdate > now) {
+        resultElement.textContent = "You haven't been born yet! 😅";
+        return;
     }
 
-    return age;
+    const age = calculateFullAge(birthdate, now);
+
+    resultElement.innerHTML = `
+        <strong>You're exactly:</strong><br>
+        ${age.years} Years<br>
+        ${age.months} Months<br>
+        ${age.days} Days<br>
+        ${age.hours} Hours<br>
+        ${age.minutes} Minutes
+    `;
+});
+
+function calculateFullAge(birthdate, now) {
+    let years = now.getFullYear() - birthdate.getFullYear();
+    let months = now.getMonth() - birthdate.getMonth();
+    let days = now.getDate() - birthdate.getDate();
+    let hours = now.getHours() - birthdate.getHours();
+    let minutes = now.getMinutes() - birthdate.getMinutes();
+
+    if (minutes < 0) {
+        minutes += 60;
+        hours--;
+    }
+    if (hours < 0) {
+        hours += 24;
+        days--;
+    }
+    if (days < 0) {
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+        months--;
+    }
+    if (months < 0) {
+        months += 12;
+        years--;
+    }
+
+    return { years, months, days, hours, minutes };
 }
+const modeToggle = document.getElementById('modeToggle');
+modeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    modeToggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+});
